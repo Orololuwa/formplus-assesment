@@ -1,11 +1,13 @@
-import './App.css';
+import Header from "Layout/header";
+import Content from "Layout/content";
 
-function App() {
+const App = () => {
   return (
-    <h1 className="text-3xl text-red-500 font-bold underline">
-      Hello world!
-    </h1>
-  )
-}
+    <>
+      <Header />
+      <Content />
+    </>
+  );
+};
 
 export default App;
