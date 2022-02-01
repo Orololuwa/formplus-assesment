@@ -24,11 +24,11 @@ const Dropdown = ({ options, placeholder, className }) => {
       <div
         onClick={optionShowHandler}
         className={cn({
-          "border-2 px-4 py-1 w-24 sm:w-24 lg:44 focus:outline-none text-gray-700 cursor-pointer capitalize": true,
+          "border-2 px-4 py-1 w-24 sm:w-24 lg:w-44 focus:outline-none text-gray-700 cursor-pointer capitalize whitespace-nowrap overflow-hidden text-ellipsis": true,
           [className]: className,
         })}
       >
-        <span className="py-1 text-xs">{value}</span>
+        <span className="py-1 text-xs text-ellipsis">{value}</span>
       </div>
       {placeholder && (
         <span className="absolute -top-2 left-6 px-2 bg-white text-xs text-gray-400 capitalize">
@@ -43,7 +43,7 @@ const Dropdown = ({ options, placeholder, className }) => {
         size={15}
       />
       {optionShow && (
-        <div className="absolute top-full left-0 w-full pt-2">
+        <div className="absolute top-full left-0 w-full pt-2 bg-gray-50">
           {options.map((dropdown, idx) => (
             <DropdownOption key={idx} onClick={() => setValueHandler(dropdown)}>
               {dropdown}
