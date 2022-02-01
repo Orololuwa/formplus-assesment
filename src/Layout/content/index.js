@@ -1,9 +1,10 @@
 import Banner from "components/banner";
 import WarningIcon from "assets/images/png/warning.png";
+import Templates from "containers/templatesContainer";
 
 const Content = () => {
   return (
-    <div className="px-8 md:px-16">
+    <main className="px-8 md:px-16">
       <Banner>
         <img src={WarningIcon} alt="warning Icon" className="mr-6 w-4 h-4" />
         <span className="text-sm ">
@@ -11,7 +12,8 @@ const Content = () => {
           looking for? Search from the 1000+ available templates
         </span>
       </Banner>
-    </div>
+      <Templates />
+    </main>
   );
 };
 
