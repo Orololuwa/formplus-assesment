@@ -2,8 +2,6 @@ import Header from "Layout/header";
 import Content from "Layout/content";
 import { ThemeProvider } from "styled-components";
 import theme from "theme";
-import axios from "axios";
-import { useEffect } from "react";
 
 const App = () => {
   return (

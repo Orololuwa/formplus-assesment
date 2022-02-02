@@ -1,0 +1,7 @@
+const types = {
+  TEMPLATES_BEGIN: "TEMPLATES_BEGIN",
+  TEMPLATES_SUCCESS: "TEMPLATES_SUCCESS",
+  TEMPLATES_ERR: "TEMPLATES_ERR",
+};
+
+export default types;
