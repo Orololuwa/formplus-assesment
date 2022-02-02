@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Pagination from "components/Pagination";
 import TemplateCard from "components/templateCard";
+import Loading from "components/loading";
 
 const Templates = () => {
   //Data from the store
@@ -50,6 +51,7 @@ const Templates = () => {
           />
         </section>
       )}
+      {/* <Loading /> */}
     </>
   );
 };

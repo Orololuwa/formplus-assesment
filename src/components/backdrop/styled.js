@@ -14,9 +14,9 @@ const BackdropCtx = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-    height: 100vh;
-    z-index: 50000;
-  background: rgba(0, 0, 0, 0.75);
+  height: 100vh;
+  z-index: 50000;
+  background-color: ${({ theme }) => theme.colors.black}A4;
   animation: ${fadeIn} 0.2s;
 `;
 
