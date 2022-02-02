@@ -34,7 +34,12 @@ const Templates = () => {
           </div>
           <div className="templates py-8 grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-y-8 justify-items-center">
             {currentData.map((temp, idx) => (
-              <TemplateCard key={idx} />
+              <TemplateCard
+                key={idx}
+                name="Lorem veniam, adipiscing"
+                description="Engage your alumni network better with this alumni registration form template. Embed this in your website ..."
+                link="https://formpl.us/templates"
+              />
             ))}
           </div>
           <Pagination

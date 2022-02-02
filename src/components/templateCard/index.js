@@ -1,14 +1,29 @@
-const TemplateCard = () => (
-  <div className="shadow-[0_4px_30px_rgba(0,0,0,0.08)]  w-80 rounded-sm">
-    <div className=" px-6 py-4">
-      <h3 className="text-xl">Alumni Membership Form Template</h3>
-      <p className="text-xs py-4">
-        Engage your alumni network better with this alumni registration form
-        template. Embed this in your website ...
-      </p>
+import propTypes from "prop-types";
+
+const TemplateCard = (props) => {
+  const { name, description, link } = props;
+  return (
+    <div className="shadow-[0_4px_30px_rgba(0,0,0,0.08)]  w-80 rounded-sm cursor-pointer hover:scale-105 transition-transform">
+      <div className="h-36 px-6 py-4">
+        <h3 className="text-xl">{name}</h3>
+        <p className="text-xs py-4">{description}</p>
+      </div>
+      <a
+        className="bg-gray-50 text-green-500 px-6 py-4 block"
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Use Template
+      </a>
     </div>
-    <div className="bg-gray-50 text-green-500 px-6 py-4">Use Template</div>
-  </div>
-);
+  );
+};
+
+TemplateCard.propTypes = {
+  name: propTypes.string.isRequired,
+  description: propTypes.string.isRequired,
+  link: propTypes.string.isRequired,
+};
 
 export default TemplateCard;
