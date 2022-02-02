@@ -13,9 +13,12 @@ const templatesSuccess = (data) => {
   };
 };
 
-const templatesErr = () => {
+const templatesErr = (err) => {
   return {
     type: types.TEMPLATES_ERR,
+    payload: {
+      err,
+    },
   };
 };
 

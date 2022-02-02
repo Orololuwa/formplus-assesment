@@ -5,7 +5,7 @@ const { TEMPLATES_BEGIN, TEMPLATES_SUCCESS, TEMPLATES_ERR } = types;
 const initialState = {
   data: null,
   loading: false,
-  error: false,
+  error: null,
 };
 
 const templateReducer = (state = initialState, action) => {
@@ -21,11 +21,12 @@ const templateReducer = (state = initialState, action) => {
         ...state,
         data: payload,
         loading: false,
+        error: null,
       };
     case TEMPLATES_ERR:
       return {
         ...state,
-        error: true,
+        error: payload.err,
         loading: false,
       };
     default:

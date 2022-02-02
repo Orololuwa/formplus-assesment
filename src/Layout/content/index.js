@@ -1,8 +1,17 @@
+import { useEffect } from "react";
 import Banner from "components/banner";
 import WarningIcon from "assets/images/png/warning.png";
 import Templates from "containers/templatesContainer";
+import { useDispatch } from "react-redux";
+import { fetchTemplates } from "redux/templates/actionCreator";
 
 const Content = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTemplates());
+  }, []);
+
   return (
     <main className="px-8 md:px-16">
       <Banner>
