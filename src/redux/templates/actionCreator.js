@@ -8,7 +8,11 @@ const fetchTemplates = () => {
       const res = await axios.get("/public/task_templates");
       dispatch(templatesSuccess(res.data));
     } catch (err) {
-      dispatch(templatesErr(err));
+      if (err.message) {
+        dispatch(templatesErr(err.message));
+      } else {
+        dispatch(templatesErr("Oops, Something went wrong!"));
+      }
     }
   };
 };
