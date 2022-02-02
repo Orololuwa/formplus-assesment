@@ -1,7 +1,7 @@
 import { useState } from "react";
 import propTypes from "prop-types";
 import cn from "classnames";
-import { IoCaretDownOutline } from "react-icons/io5";
+import { BsChevronDown } from "react-icons/bs";
 
 import DropdownOption from "./dropdownOption";
 
@@ -35,7 +35,8 @@ const Dropdown = ({ options, placeholder, className }) => {
           {placeholder}
         </span>
       )}
-      <IoCaretDownOutline
+      <BsChevronDown
+        onClick={optionShowHandler}
         className={cn({
           "absolute top-1/2 right-2 md:right-4 -translate-y-1/2 text-gray-400 text-lg bg-white cursor-pointer leading-none  transition-transform": true,
           "rotate-180": optionShow,

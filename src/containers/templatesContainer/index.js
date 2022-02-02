@@ -1,8 +1,16 @@
+import { useState } from "react";
+import Pagination from "components/Pagination";
 import TemplateCard from "components/templateCard";
 
 const Templates = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const pageChangedHandler = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <section className="">
+    <section className="pt-2 pb-10">
       <div className="flex justify-between text-sm pt-5">
         <h6 className="text-gray-700">All Templates</h6>
         <p className="text-gray-400">2000 templates</p>
@@ -20,6 +28,12 @@ const Templates = () => {
         <TemplateCard />
         <TemplateCard />
       </div>
+      <Pagination
+        pageSize={3}
+        totalCount={11}
+        currentPage={currentPage}
+        onPageChange={pageChangedHandler}
+      />
     </section>
   );
 };
