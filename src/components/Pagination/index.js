@@ -23,7 +23,7 @@ const Pagination = (props) => {
     onPageChange(currentPage - 1);
   };
 
-  //Two way binding for Input
+  //Two way binding for Input and submit handler
   const [current, setCurrent] = useState(currentPage);
 
   const onValueChangedHandler = (event) => {
@@ -48,8 +48,9 @@ const Pagination = (props) => {
   return (
     <div className="flex items-center justify-between py-4 md:px-16">
       <button
-        className="flex items-center cursor-pointer hover:text-gray-400 transition-colors"
+        className="flex items-center cursor-pointer hover:text-gray-400 transition-colors disabled:cursor-not-allowed"
         onClick={onPrevious}
+        disabled={currentPage === firstPageIndex}
       >
         <span className="w-6">
           {currentPage !== firstPageIndex && <BiChevronLeft size={20} />}
@@ -61,13 +62,14 @@ const Pagination = (props) => {
           type="number"
           value={current}
           onChange={onValueChangedHandler}
-          className="rounded-md border-black border-2 w-6 h-6 text-center inline-flex items-center justify-center"
+          className="rounded-md border-black border-2 w-12 h-6 text-center inline-flex items-center justify-center"
         />
         <p> of {totalPageCount}</p>
       </form>
       <button
-        className="flex items-center cursor-pointer hover:text-gray-400 transition-colors"
+        className="flex items-center cursor-pointer hover:text-gray-400 transition-colors disabled:cursor-not-allowed"
         onClick={onNext}
+        disabled={currentPage === lastPageIndex}
       >
         <p>Next</p>
         <span className="w-6">

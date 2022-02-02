@@ -2,15 +2,25 @@ import { useEffect } from "react";
 import Banner from "components/banner";
 import WarningIcon from "assets/images/png/warning.png";
 import Templates from "containers/templatesContainer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchTemplates } from "redux/templates/actionCreator";
+import Loading from "components/loading";
+import Error from "components/error";
 
 const Content = () => {
+  //Dispatch action to fetch the templates from the API
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchTemplates());
   }, []);
+
+  //Data, loading state and error state from the store
+  const { data, loading, error } = useSelector((state) => ({
+    data: state.templates.data,
+    loading: state.templates.loading,
+    error: state.templates.error,
+  }));
 
   return (
     <main className="px-8 md:px-16">
@@ -21,7 +31,9 @@ const Content = () => {
           looking for? Search from the 1000+ available templates
         </span>
       </Banner>
-      <Templates />
+      {data && <Templates data={data} loading={loading} error={error} />}
+      {loading && <Loading />}
+      {error && <Error>{error}</Error>}
     </main>
   );
 };
