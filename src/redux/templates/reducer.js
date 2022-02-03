@@ -8,6 +8,9 @@ const {
   TEMPLATES_SEARCH_BEGIN,
   TEMPLATES_SEARCH,
   TEMPLATES_SEARCH_CLEAR,
+  FILTER_BY_CATEGORY_BEGIN,
+  FILTER_BY_CATEGORY,
+  FILTER_BY_CATEGORY_CLEAR,
 } = types;
 
 const initialState = {
@@ -49,16 +52,37 @@ const templateReducer = (state = initialState, action) => {
         loading: true,
       };
     case TEMPLATES_SEARCH:
-      const dataCopy = [...state.filteredData];
-      const filtered = dataCopy.filter((template) =>
+      const dataSearch = [...state.filteredData];
+      const filteredSearch = dataSearch.filter((template) =>
         template.name.includes(payload.val)
       );
       return {
         ...state,
-        filteredData: [...filtered],
+        filteredData: [...filteredSearch],
         loading: false,
       };
     case TEMPLATES_SEARCH_CLEAR:
+      return {
+        ...state,
+        filteredData: [...state.data],
+        loading: false,
+      };
+    case FILTER_BY_CATEGORY_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FILTER_BY_CATEGORY:
+      const dataCategory = [...state.data];
+      const filteredCategory = dataCategory.filter((template) =>
+        template.category.includes(payload.category)
+      );
+      return {
+        ...state,
+        filteredData: [...filteredCategory],
+        loading: false,
+      };
+    case FILTER_BY_CATEGORY_CLEAR:
       return {
         ...state,
         filteredData: [...state.data],

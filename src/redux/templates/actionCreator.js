@@ -7,6 +7,9 @@ import {
   templatesSearchBegin,
   templatesSearch,
   templatesSearchClear,
+  filterByCategory,
+  filterByCategoryClear,
+  filterByCategoryBegin,
 } from "./actions";
 
 const fetchTemplates = () => {
@@ -29,11 +32,26 @@ const fetchTemplates = () => {
 const searchTemplates = (val) => {
   return (dispatch) => {
     dispatch(templatesSearchBegin());
-    //delay the search for 2 seconds to make it seem like it coming from the backend
+    //delay the search for 1 second to make it seem like it coming from the backend
     setTimeout(() => {
       dispatch(templatesSearch(val));
-    }, 2000);
+    }, 1000);
   };
 };
 
-export { fetchTemplates, searchTemplates };
+const filterTemplatesByCategory = (category) => {
+  return (dispatch) => {
+    dispatch(templatesSearchClear());
+    dispatch(filterByCategoryBegin());
+    //delay the filter for 1 second to make it seem like it coming from the backend
+    setTimeout(() => {
+      if (category === "All") {
+        dispatch(filterByCategoryClear());
+      } else {
+        dispatch(filterByCategory(category));
+      }
+    }, 1000);
+  };
+};
+
+export { fetchTemplates, searchTemplates, filterTemplatesByCategory };

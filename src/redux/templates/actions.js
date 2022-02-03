@@ -49,6 +49,27 @@ const templatesSearch = (val) => {
   };
 };
 
+const filterByCategoryBegin = () => {
+  return {
+    type: types.FILTER_BY_CATEGORY_BEGIN,
+  };
+};
+
+const filterByCategoryClear = () => {
+  return {
+    type: types.FILTER_BY_CATEGORY_CLEAR,
+  };
+};
+
+const filterByCategory = (category) => {
+  return {
+    type: types.FILTER_BY_CATEGORY,
+    payload: {
+      category,
+    },
+  };
+};
+
 export {
   templatesBegin,
   templatesSuccess,
@@ -56,5 +77,8 @@ export {
   initialTemplateFilter,
   templatesSearchBegin,
   templatesSearch,
-  templatesSearchClear
+  templatesSearchClear,
+  filterByCategoryBegin,
+  filterByCategoryClear,
+  filterByCategory,
 };
