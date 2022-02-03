@@ -17,7 +17,7 @@ const Content = () => {
 
   //Data, loading state and error state from the store
   const { data, loading, error } = useSelector((state) => ({
-    data: state.templates.filteredData,
+    data: state.templates.renderedData,
     loading: state.templates.loading,
     error: state.templates.error,
   }));

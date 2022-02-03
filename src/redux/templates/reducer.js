@@ -16,6 +16,7 @@ const {
 const initialState = {
   data: null,
   filteredData: [],
+  renderedData: [],
   loading: false,
   error: null,
 };
@@ -45,27 +46,7 @@ const templateReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredData: [...state.data],
-      };
-    case TEMPLATES_SEARCH_BEGIN:
-      return {
-        ...state,
-        loading: true,
-      };
-    case TEMPLATES_SEARCH:
-      const dataSearch = [...state.filteredData];
-      const filteredSearch = dataSearch.filter((template) =>
-        template.name.includes(payload.val)
-      );
-      return {
-        ...state,
-        filteredData: [...filteredSearch],
-        loading: false,
-      };
-    case TEMPLATES_SEARCH_CLEAR:
-      return {
-        ...state,
-        filteredData: [...state.data],
-        loading: false,
+        renderedData: [...state.data],
       };
     case FILTER_BY_CATEGORY_BEGIN:
       return {
@@ -80,12 +61,36 @@ const templateReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredData: [...filteredCategory],
+        renderedData: [...filteredCategory],
         loading: false,
       };
     case FILTER_BY_CATEGORY_CLEAR:
       return {
         ...state,
         filteredData: [...state.data],
+        renderedData: [...state.data],
+        loading: false,
+      };
+    case TEMPLATES_SEARCH_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case TEMPLATES_SEARCH:
+      //Searching is based on the active category
+      const dataSearch = [...state.filteredData];
+      const filteredSearch = dataSearch.filter((template) =>
+        template.name.includes(payload.val)
+      );
+      return {
+        ...state,
+        renderedData: [...filteredSearch],
+        loading: false,
+      };
+    case TEMPLATES_SEARCH_CLEAR:
+      return {
+        ...state,
+        renderedData: [...state.filteredData],
         loading: false,
       };
     default:
