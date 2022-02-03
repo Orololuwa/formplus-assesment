@@ -33,12 +33,27 @@ const Pagination = (props) => {
     } else return;
   };
 
+  //Functions to submit the page to be changed
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (current) {
       onPageChange(current);
     }
   };
+
+  useEffect(() => {
+    // timeout function to automatically change the page after you've typed it in for a second
+    const inputTimer = setTimeout(() => {
+      if (current) {
+        onPageChange(current);
+      }
+    }, 1000);
+
+    return () => {
+      // clear the timeout function when component unmounts or the current page updates
+      clearTimeout(inputTimer);
+    };
+  }, [current]);
 
   //Function to change the value of the Input when the current Page changes
   useEffect(() => {
