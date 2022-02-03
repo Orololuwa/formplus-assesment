@@ -5,17 +5,15 @@ import { BsChevronDown } from "react-icons/bs";
 
 import DropdownOption from "./dropdownOption";
 
-const Dropdown = ({ options, placeholder, className }) => {
+const Dropdown = ({ options, placeholder, className, value, onChange }) => {
   const [optionShow, setOptionShow] = useState(false);
 
   const optionShowHandler = () => {
     setOptionShow((prevState) => !prevState);
   };
 
-  const [value, setValue] = useState(options[0]);
-
   const setValueHandler = (val) => {
-    setValue(val);
+    onChange(val);
     setOptionShow(false);
   };
 
@@ -62,4 +60,6 @@ Dropdown.propTypes = {
   options: propTypes.arrayOf(propTypes.string),
   className: propTypes.string,
   placeholder: propTypes.string,
+  value: propTypes.any,
+  onChange: propTypes.func,
 };

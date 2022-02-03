@@ -1,8 +1,10 @@
-import { Input, Dropdown } from "components/input";
-import { useEffect, useState } from "react";
+import { Input } from "components/input";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { searchTemplates } from "redux/templates/actionCreator";
-import { templatesSearchClear } from "redux/templates/actions";
+import CategoryDropdown from "./categoryDropdown";
+import DateDropdown from "./dateDropDown";
+import OrderDropdown from "./orderDropdown";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -41,18 +43,9 @@ const Header = () => {
         </form>
         <div className="flex items-center gap-1 md:gap-4">
           <span className="text-sm text-gray-400">Sort by:</span>
-          <Dropdown
-            placeholder="category"
-            options={["all", "education", "e-commerce", "health"]}
-          />
-          <Dropdown
-            placeholder="Order"
-            options={["default", "ascending", "descending"]}
-          />
-          <Dropdown
-            placeholder="Date"
-            options={["default", "ascending", "descending"]}
-          />
+          <CategoryDropdown />
+          <OrderDropdown />
+          <DateDropdown />
         </div>
       </header>
     )
