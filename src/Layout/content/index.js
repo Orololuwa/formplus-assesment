@@ -17,14 +17,14 @@ const Content = () => {
 
   //Data, loading state and error state from the store
   const { data, loading, error } = useSelector((state) => ({
-    data: state.templates.data,
+    data: state.templates.filteredData,
     loading: state.templates.loading,
     error: state.templates.error,
   }));
 
   return (
     <main className="px-8 md:px-16">
-      {data && (
+      {!!data.length && (
         <>
           <Banner>
             <img

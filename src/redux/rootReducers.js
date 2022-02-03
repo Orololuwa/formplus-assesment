@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import templateReducer from "./templates/reducers";
+import templateReducer from "./templates/reducer";
 
 const rootReducer = combineReducers({
   templates: templateReducer,

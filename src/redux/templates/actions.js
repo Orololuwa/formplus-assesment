@@ -22,4 +22,39 @@ const templatesErr = (err) => {
   };
 };
 
-export { templatesBegin, templatesSuccess, templatesErr };
+const initialTemplateFilter = () => {
+  return {
+    type: types.TEMPLATES_INIT_FILTER,
+  };
+};
+
+const templatesSearchBegin = () => {
+  return {
+    type: types.TEMPLATES_SEARCH_BEGIN,
+  };
+};
+
+const templatesSearchClear = () => {
+  return {
+    type: types.TEMPLATES_SEARCH_CLEAR,
+  };
+};
+
+const templatesSearch = (val) => {
+  return {
+    type: types.TEMPLATES_SEARCH,
+    payload: {
+      val,
+    },
+  };
+};
+
+export {
+  templatesBegin,
+  templatesSuccess,
+  templatesErr,
+  initialTemplateFilter,
+  templatesSearchBegin,
+  templatesSearch,
+  templatesSearchClear
+};
