@@ -18,6 +18,7 @@ const initialState = {
   filteredData: [],
   renderedData: [],
   loading: false,
+  searchValue: "",
   error: null,
 };
 
@@ -85,12 +86,14 @@ const templateReducer = (state = initialState, action) => {
       return {
         ...state,
         renderedData: [...filteredSearch],
+        searchValue: payload.val,
         loading: false,
       };
     case TEMPLATES_SEARCH_CLEAR:
       return {
         ...state,
         renderedData: [...state.filteredData],
+        searchValue: "",
         loading: false,
       };
     default:
