@@ -22,9 +22,9 @@ const templatesErr = (err) => {
   };
 };
 
-const initialTemplateFilter = () => {
+const initialTemplatesRender = () => {
   return {
-    type: types.TEMPLATES_INIT_FILTER,
+    type: types.INIT_TEMPLATES_RENDER,
   };
 };
 
@@ -74,7 +74,7 @@ export {
   templatesBegin,
   templatesSuccess,
   templatesErr,
-  initialTemplateFilter,
+  initialTemplatesRender,
   templatesSearchBegin,
   templatesSearch,
   templatesSearchClear,

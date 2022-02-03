@@ -4,7 +4,7 @@ const {
   TEMPLATES_BEGIN,
   TEMPLATES_SUCCESS,
   TEMPLATES_ERR,
-  TEMPLATES_INIT_FILTER,
+  INIT_TEMPLATES_RENDER,
   TEMPLATES_SEARCH_BEGIN,
   TEMPLATES_SEARCH,
   TEMPLATES_SEARCH_CLEAR,
@@ -15,7 +15,9 @@ const {
 
 const initialState = {
   data: null,
-  filteredData: [],
+  initialFilteredData: [],
+  initialSearchedData: [],
+  initialSortedData: [],
   renderedData: [],
   loading: false,
   searchValue: "",
@@ -43,11 +45,11 @@ const templateReducer = (state = initialState, action) => {
         error: payload.err,
         loading: false,
       };
-    case TEMPLATES_INIT_FILTER:
+    case INIT_TEMPLATES_RENDER:
       return {
         ...state,
-        filteredData: [...state.data],
         renderedData: [...state.data],
+        initialFilteredData: [...state.data], //store the templates in the initialFilteredData variable on first filter in order to be able to use it to reset filter back to "All"
       };
     case FILTER_BY_CATEGORY_BEGIN:
       return {
@@ -55,44 +57,45 @@ const templateReducer = (state = initialState, action) => {
         loading: true,
       };
     case FILTER_BY_CATEGORY:
-      const dataCategory = [...state.data];
+      const dataCategory = [...state.renderedData];
       const filteredCategory = dataCategory.filter((template) =>
         template.category.includes(payload.category)
       );
       return {
         ...state,
-        filteredData: [...filteredCategory],
-        renderedData: [...filteredCategory],
+        renderedData: [...filteredCategory], //store templates filtered by category
         loading: false,
       };
     case FILTER_BY_CATEGORY_CLEAR:
       return {
         ...state,
-        filteredData: [...state.data],
-        renderedData: [...state.data],
+        renderedData: [...state.initialFilteredData], //restore filter back to "All"
         loading: false,
       };
     case TEMPLATES_SEARCH_BEGIN:
       return {
         ...state,
         loading: true,
+        initialSearchedData: state.initialSearchedData.length
+          ? state.initialSearchedData
+          : [...state.renderedData],
       };
     case TEMPLATES_SEARCH:
       //Searching is based on the active category
-      const dataSearch = [...state.filteredData];
+      const dataSearch = [...state.initialSearchedData];
       const filteredSearch = dataSearch.filter((template) =>
         template.name.includes(payload.val)
       );
       return {
         ...state,
-        renderedData: [...filteredSearch],
-        searchValue: payload.val,
+        renderedData: [...filteredSearch], // store templates containing the searched name
+        searchValue: payload.val, //store the searched name
         loading: false,
       };
     case TEMPLATES_SEARCH_CLEAR:
       return {
         ...state,
-        renderedData: [...state.filteredData],
+        renderedData: [...state.initialFilteredData], //set rendered templates as the initial templates of the current category
         searchValue: "",
         loading: false,
       };

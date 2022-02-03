@@ -3,7 +3,7 @@ import {
   templatesBegin,
   templatesSuccess,
   templatesErr,
-  initialTemplateFilter,
+  initialTemplatesRender,
   templatesSearchBegin,
   templatesSearch,
   templatesSearchClear,
@@ -18,7 +18,7 @@ const fetchTemplates = () => {
       dispatch(templatesBegin());
       const res = await axios.get("/public/task_templates");
       dispatch(templatesSuccess(res.data));
-      dispatch(initialTemplateFilter());
+      dispatch(initialTemplatesRender());
     } catch (err) {
       if (err.message) {
         dispatch(templatesErr(err.message));
