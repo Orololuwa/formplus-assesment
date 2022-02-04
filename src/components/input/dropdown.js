@@ -13,8 +13,8 @@ const Dropdown = ({ options, placeholder, className, value, onChange }) => {
   };
 
   const setValueHandler = (val) => {
-    onChange(val);
     setOptionShow(false);
+    onChange(val);
   };
 
   return (

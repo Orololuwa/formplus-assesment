@@ -8,7 +8,10 @@ import OrderDropdown from "./orderDropdown";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const searchValue = useSelector((state) => state.templates.searchValue);
+  const { data, searchValue } = useSelector((state) => ({
+    data: state.templates.data,
+    searchValue: state.templates.searchValue,
+  }));
 
   //Two way binding for search input
   const [value, setValue] = useState("");
@@ -35,23 +38,25 @@ const Header = () => {
   }, [searchValue]);
 
   return (
-    <header className="px-8 md:px-16 py-8 flex flex-col sm:flex-row gap-4 lg:gap-0 justify-between">
-      <form onSubmit={onSubmitHandler}>
-        <Input
-          type="search"
-          placeholder="Search Templates"
-          value={value}
-          onChange={onChangedHandler}
-          onSubmit={onSubmitHandler}
-        />
-      </form>
-      <div className="flex items-center gap-1 md:gap-4">
-        <span className="text-sm text-gray-400">Sort by:</span>
-        <CategoryDropdown />
-        <OrderDropdown />
-        <DateDropdown />
-      </div>
-    </header>
+    data && (
+      <header className="px-8 md:px-16 py-8 flex flex-col sm:flex-row gap-4 lg:gap-0 justify-between">
+        <form onSubmit={onSubmitHandler}>
+          <Input
+            type="search"
+            placeholder="Search Templates"
+            value={value}
+            onChange={onChangedHandler}
+            onSubmit={onSubmitHandler}
+          />
+        </form>
+        <div className="flex items-center gap-1 md:gap-4">
+          <span className="text-sm text-gray-400">Sort by:</span>
+          <CategoryDropdown />
+          <OrderDropdown />
+          <DateDropdown />
+        </div>
+      </header>
+    )
   );
 };
 

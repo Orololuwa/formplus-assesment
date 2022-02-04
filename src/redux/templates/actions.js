@@ -70,6 +70,48 @@ const filterByCategory = (category) => {
   };
 };
 
+const sortByNameBegin = () => {
+  return {
+    type: types.SORT_BY_NAME_BEGIN,
+  };
+};
+
+const sortByNameClear = () => {
+  return {
+    type: types.SORT_BY_NAME_CLEAR,
+  };
+};
+
+const sortByName = (value) => {
+  return {
+    type: types.SORT_BY_NAME,
+    payload: {
+      value,
+    },
+  };
+};
+
+const sortByDateBegin = () => {
+  return {
+    type: types.SORT_BY_DATE_BEGIN,
+  };
+};
+
+const sortByDateClear = () => {
+  return {
+    type: types.SORT_BY_DATE_CLEAR,
+  };
+};
+
+const sortByDate = (value) => {
+  return {
+    type: types.SORT_BY_DATE,
+    payload: {
+      value,
+    },
+  };
+};
+
 export {
   templatesBegin,
   templatesSuccess,
@@ -81,4 +123,10 @@ export {
   filterByCategoryBegin,
   filterByCategoryClear,
   filterByCategory,
+  sortByNameBegin,
+  sortByNameClear,
+  sortByName,
+  sortByDate,
+  sortByDateBegin,
+  sortByDateClear,
 };

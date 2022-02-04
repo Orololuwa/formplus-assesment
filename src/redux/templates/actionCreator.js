@@ -10,6 +10,12 @@ import {
   filterByCategory,
   filterByCategoryClear,
   filterByCategoryBegin,
+  sortByDate,
+  sortByDateBegin,
+  sortByDateClear,
+  sortByName,
+  sortByNameBegin,
+  sortByNameClear,
 } from "./actions";
 
 const fetchTemplates = () => {
@@ -41,7 +47,8 @@ const searchTemplates = (val) => {
 
 const filterTemplatesByCategory = (category) => {
   return (dispatch) => {
-    dispatch(templatesSearchClear());
+    dispatch(templatesSearchClear()); // clear the search filter
+    dispatch(sortByNameClear()) // clear the 'order by Name' filter
     dispatch(filterByCategoryBegin());
     //delay the filter for 1 second to make it seem like it coming from the backend
     setTimeout(() => {
@@ -54,4 +61,19 @@ const filterTemplatesByCategory = (category) => {
   };
 };
 
-export { fetchTemplates, searchTemplates, filterTemplatesByCategory };
+const sortTemplatesByName = (value) => {
+  return (dispatch) => {
+    dispatch(sortByNameBegin());
+    //delay the filter for 1 second to make it seem like it coming from the backend
+    setTimeout(() => {
+      dispatch(sortByName(value));
+    }, 1000);
+  };
+};
+
+export {
+  fetchTemplates,
+  searchTemplates,
+  filterTemplatesByCategory,
+  sortTemplatesByName,
+};

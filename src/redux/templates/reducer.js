@@ -1,3 +1,4 @@
+import { sortByName } from "utils";
 import types from "./types";
 
 const {
@@ -11,16 +12,23 @@ const {
   FILTER_BY_CATEGORY_BEGIN,
   FILTER_BY_CATEGORY,
   FILTER_BY_CATEGORY_CLEAR,
+  SORT_BY_DATE,
+  SORT_BY_DATE_CLEAR,
+  SORT_BY_DATE_BEGIN,
+  SORT_BY_NAME,
+  SORT_BY_NAME_BEGIN,
+  SORT_BY_NAME_CLEAR,
 } = types;
 
 const initialState = {
   data: null,
-  initialFilteredData: [],
-  initialSearchedData: [],
-  initialSortedData: [],
+  initialDataBeforeFilter: [],
+  initialDataBeforeSearch: [],
+  initialDataBeforeSort: [],
   renderedData: [],
   loading: false,
   searchValue: "",
+  nameSortActive: false,
   error: null,
 };
 
@@ -49,7 +57,7 @@ const templateReducer = (state = initialState, action) => {
       return {
         ...state,
         renderedData: [...state.data],
-        initialFilteredData: [...state.data], //store the templates in the initialFilteredData variable on first filter in order to be able to use it to reset filter back to "All"
+        initialDataBeforeFilter: [...state.data], //store the templates in the initialDataBeforeFilter variable on first filter in order to be able to use it to reset filter back to "All"
       };
     case FILTER_BY_CATEGORY_BEGIN:
       return {
@@ -69,20 +77,20 @@ const templateReducer = (state = initialState, action) => {
     case FILTER_BY_CATEGORY_CLEAR:
       return {
         ...state,
-        renderedData: [...state.initialFilteredData], //restore filter back to "All"
+        renderedData: [...state.initialDataBeforeFilter], //restore filter back to "All"
         loading: false,
       };
     case TEMPLATES_SEARCH_BEGIN:
       return {
         ...state,
         loading: true,
-        initialSearchedData: state.initialSearchedData.length
-          ? state.initialSearchedData
+        initialDataBeforeSearch: state.initialDataBeforeSearch.length
+          ? state.initialDataBeforeSearch
           : [...state.renderedData],
       };
     case TEMPLATES_SEARCH:
       //Searching is based on the active category
-      const dataSearch = [...state.initialSearchedData];
+      const dataSearch = [...state.initialDataBeforeSearch];
       const filteredSearch = dataSearch.filter((template) =>
         template.name.includes(payload.val)
       );
@@ -95,9 +103,33 @@ const templateReducer = (state = initialState, action) => {
     case TEMPLATES_SEARCH_CLEAR:
       return {
         ...state,
-        renderedData: [...state.initialFilteredData], //set rendered templates as the initial templates of the current category
+        renderedData: [...state.initialDataBeforeFilter], //set rendered templates as the initial templates of the current category
         searchValue: "",
         loading: false,
+      };
+    case SORT_BY_NAME_BEGIN:
+      return {
+        ...state,
+        initialDataBeforeSort: state.initialDataBeforeSort.length
+          ? state.initialDataBeforeSort
+          : [...state.renderedData],
+        loading: true,
+      };
+    case SORT_BY_NAME:
+      //Sorting is based on the active category
+      const dataSortByNameCopy = [...state.initialDataBeforeSort];
+      let sortedByName = sortByName(dataSortByNameCopy, payload.value);
+      return {
+        ...state,
+        renderedData: sortedByName,
+        nameSortActive: true,
+        loading: false,
+      };
+    case SORT_BY_NAME_CLEAR:
+      return {
+        ...state,
+        initialDataBeforeSort: [], //clear initial data before sorting
+        nameSortActive: false,
       };
     default:
       return { ...state };
