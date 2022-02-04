@@ -37,6 +37,7 @@ const Templates = (props) => {
             description={temp.description}
             link={temp.link}
             category={temp.category}
+            created={temp.created}
           />
         ))}
       </div>
