@@ -48,7 +48,8 @@ const searchTemplates = (val) => {
 const filterTemplatesByCategory = (category) => {
   return (dispatch) => {
     dispatch(templatesSearchClear()); // clear the search filter
-    dispatch(sortByNameClear()) // clear the 'order by Name' filter
+    dispatch(sortByNameClear()); // clear the 'sort by Name' filter
+    dispatch(sortByDateClear()); // clear the 'sort by Date' filter
     dispatch(filterByCategoryBegin());
     //delay the filter for 1 second to make it seem like it coming from the backend
     setTimeout(() => {
@@ -63,10 +64,24 @@ const filterTemplatesByCategory = (category) => {
 
 const sortTemplatesByName = (value) => {
   return (dispatch) => {
+    dispatch(sortByDateClear()); // clear the 'sort by Date' filter
+    dispatch(templatesSearchClear()); // clear the search filter
     dispatch(sortByNameBegin());
     //delay the filter for 1 second to make it seem like it coming from the backend
     setTimeout(() => {
       dispatch(sortByName(value));
+    }, 1000);
+  };
+};
+
+const sortTemplatesByDate = (value) => {
+  return (dispatch) => {
+    dispatch(sortByNameClear()); // clear the 'sort by Name' filter
+    dispatch(templatesSearchClear()); // clear the search filter
+    dispatch(sortByDateBegin());
+    //delay the filter for 1 second to make it seem like it coming from the backend
+    setTimeout(() => {
+      dispatch(sortByDate(value));
     }, 1000);
   };
 };
@@ -76,4 +91,5 @@ export {
   searchTemplates,
   filterTemplatesByCategory,
   sortTemplatesByName,
+  sortTemplatesByDate,
 };

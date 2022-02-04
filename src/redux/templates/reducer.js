@@ -1,4 +1,4 @@
-import { sortByName } from "utils";
+import { sortByDate, sortByName } from "utils";
 import types from "./types";
 
 const {
@@ -29,6 +29,7 @@ const initialState = {
   loading: false,
   searchValue: "",
   nameSortActive: false,
+  dateSortActive: false,
   error: null,
 };
 
@@ -128,8 +129,36 @@ const templateReducer = (state = initialState, action) => {
     case SORT_BY_NAME_CLEAR:
       return {
         ...state,
-        initialDataBeforeSort: [], //clear initial data before sorting
+        renderedData: state.initialDataBeforeSort.length
+          ? [...state.initialDataBeforeSort]
+          : [...state.renderedData],  //set the currently displayed data as the previous filtered element
         nameSortActive: false,
+      };
+    case SORT_BY_DATE_BEGIN:
+      return {
+        ...state,
+        initialDataBeforeSort: state.initialDataBeforeSort.length
+          ? state.initialDataBeforeSort
+          : [...state.renderedData],
+        loading: true,
+      };
+    case SORT_BY_DATE:
+      //Sorting is based on the active category
+      const dataSortByDateCopy = [...state.initialDataBeforeSort];
+      let sortedByDate = sortByDate(dataSortByDateCopy, payload.value);
+      return {
+        ...state,
+        renderedData: sortedByDate,
+        dateSortActive: true,
+        loading: false,
+      };
+    case SORT_BY_DATE_CLEAR:
+      return {
+        ...state,
+        renderedData: state.initialDataBeforeSort.length
+          ? [...state.initialDataBeforeSort]
+          : [...state.renderedData], //set the currently displayed data as the previous filtered element
+        dateSortActive: false,
       };
     default:
       return { ...state };
