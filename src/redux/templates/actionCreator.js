@@ -65,7 +65,6 @@ const filterTemplatesByCategory = (category) => {
 const sortTemplatesByName = (value) => {
   return (dispatch) => {
     dispatch(sortByDateClear()); // clear the 'sort by Date' filter
-    dispatch(templatesSearchClear()); // clear the search filter
     dispatch(sortByNameBegin());
     //delay the filter for 1 second to make it seem like it coming from the backend
     setTimeout(() => {
@@ -77,7 +76,6 @@ const sortTemplatesByName = (value) => {
 const sortTemplatesByDate = (value) => {
   return (dispatch) => {
     dispatch(sortByNameClear()); // clear the 'sort by Name' filter
-    dispatch(templatesSearchClear()); // clear the search filter
     dispatch(sortByDateBegin());
     //delay the filter for 1 second to make it seem like it coming from the backend
     setTimeout(() => {
