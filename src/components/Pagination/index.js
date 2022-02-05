@@ -63,7 +63,7 @@ const Pagination = (props) => {
   return (
     <div className="flex items-center justify-between py-4 md:px-16">
       <button
-        data-testId="btnPrev"
+        data-testid="btnPrev"
         className="flex items-center cursor-pointer hover:text-gray-400 transition-colors disabled:cursor-not-allowed"
         onClick={onPrevious}
         disabled={currentPage === firstPageIndex}
@@ -83,7 +83,7 @@ const Pagination = (props) => {
         <p> of {totalPageCount}</p>
       </form>
       <button
-        data-testId="btnNext"
+        data-testid="btnNext"
         className="flex items-center cursor-pointer hover:text-gray-400 transition-colors disabled:cursor-not-allowed"
         onClick={onNext}
         disabled={currentPage === lastPageIndex}

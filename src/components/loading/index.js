@@ -1,14 +1,16 @@
 import LoadingCtx from "./styled";
-import Backdrop from "components/backdrop";
+import theme from "theme";
 import propTypes from "prop-types";
 
 const Loading = (props) => (
-  <Backdrop>
+  <div
+    className={`fixed top-0 left-0 h-screen w-screen z-50 bg-[${theme.colors.black.toString()}64]`}
+  >
     <LoadingCtx {...props}>
       <div>&nbsp;</div>
       <div>&nbsp;</div>
     </LoadingCtx>
-  </Backdrop>
+  </div>
 );
 
 Loading.defaultProps = {

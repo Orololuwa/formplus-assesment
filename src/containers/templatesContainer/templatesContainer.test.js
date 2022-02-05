@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import TemplatesContainer from ".";
 import data from "./testData.json";
 
-describe("Templates Container", () => {
+describe("Unit tests for Templates Container", () => {
   test("Templates are rendered when page is loaded", () => {
     render(<TemplatesContainer data={data} />);
     const templates = screen.getByTestId("template-card1");
