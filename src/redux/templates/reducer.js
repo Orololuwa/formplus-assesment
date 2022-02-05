@@ -1,4 +1,4 @@
-import { sortByDate, sortByName, searcher } from "utils";
+import { sortByDate, sortByName, searcher, filterByCategory } from "utils";
 import types from "./types";
 
 const {
@@ -67,9 +67,7 @@ const templateReducer = (state = initialState, action) => {
       };
     case FILTER_BY_CATEGORY:
       const dataCategory = [...state.renderedData];
-      const filteredCategory = dataCategory.filter((template) =>
-        template.category.includes(payload.category)
-      );
+      const filteredCategory = filterByCategory(dataCategory, payload.category); //filter category function from utils NOTE-"It's different from the filterByCategory function in Actions"
       return {
         ...state,
         renderedData: [...filteredCategory], //store templates filtered by category
@@ -92,7 +90,7 @@ const templateReducer = (state = initialState, action) => {
     case TEMPLATES_SEARCH:
       //Searching is based on the active category
       const dataSearch = [...state.initialDataBeforeSearch];
-      const filteredSearch = searcher(dataSearch, payload.val);
+      const filteredSearch = searcher(dataSearch, payload.val); //search function
       return {
         ...state,
         renderedData: [...filteredSearch], // store templates containing the searched name
@@ -119,7 +117,7 @@ const templateReducer = (state = initialState, action) => {
     case SORT_BY_NAME:
       //Sorting is based on the active category
       const dataSortByNameCopy = [...state.initialDataBeforeSort];
-      let sortedByName = sortByName(dataSortByNameCopy, payload.value);
+      let sortedByName = sortByName(dataSortByNameCopy, payload.value); //sort function by name
       return {
         ...state,
         renderedData: sortedByName,
@@ -145,7 +143,7 @@ const templateReducer = (state = initialState, action) => {
     case SORT_BY_DATE:
       //Sorting is based on the active category
       const dataSortByDateCopy = [...state.initialDataBeforeSort];
-      let sortedByDate = sortByDate(dataSortByDateCopy, payload.value);
+      let sortedByDate = sortByDate(dataSortByDateCopy, payload.value); //sort function by order
       return {
         ...state,
         renderedData: sortedByDate,
