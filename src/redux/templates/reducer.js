@@ -1,4 +1,4 @@
-import { sortByDate, sortByName } from "utils";
+import { sortByDate, sortByName, searcher } from "utils";
 import types from "./types";
 
 const {
@@ -92,9 +92,7 @@ const templateReducer = (state = initialState, action) => {
     case TEMPLATES_SEARCH:
       //Searching is based on the active category
       const dataSearch = [...state.initialDataBeforeSearch];
-      const filteredSearch = dataSearch.filter((template) =>
-        template.name.includes(payload.val)
-      );
+      const filteredSearch = searcher(dataSearch, payload.val);
       return {
         ...state,
         renderedData: [...filteredSearch], // store templates containing the searched name
