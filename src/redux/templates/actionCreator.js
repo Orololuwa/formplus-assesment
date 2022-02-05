@@ -47,9 +47,9 @@ const searchTemplates = (val) => {
 
 const filterTemplatesByCategory = (category) => {
   return (dispatch) => {
-    dispatch(templatesSearchClear()); // clear the search filter
     dispatch(sortByNameClear()); // clear the 'sort by Name' filter
     dispatch(sortByDateClear()); // clear the 'sort by Date' filter
+    dispatch(templatesSearchClear()); // clear the search filter after both sorts have been cleared
     dispatch(filterByCategoryBegin());
     //delay the filter for 1 second to make it seem like it coming from the backend
     setTimeout(() => {
