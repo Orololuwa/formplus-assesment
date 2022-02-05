@@ -100,6 +100,7 @@ const templateReducer = (state = initialState, action) => {
         renderedData: [...filteredSearch], // store templates containing the searched name
         searchValue: payload.val, //store the searched name
         loading: false,
+        error: filteredSearch.length ? null : `Opps! ${payload.val} Not Found`,
       };
     case TEMPLATES_SEARCH_CLEAR:
       return {
@@ -107,6 +108,7 @@ const templateReducer = (state = initialState, action) => {
         renderedData: [...state.initialDataBeforeFilter], //set rendered templates as the initial templates of the current category
         searchValue: "",
         loading: false,
+        error: null,
       };
     case SORT_BY_NAME_BEGIN:
       return {
@@ -131,7 +133,7 @@ const templateReducer = (state = initialState, action) => {
         ...state,
         renderedData: state.initialDataBeforeSort.length
           ? [...state.initialDataBeforeSort]
-          : [...state.renderedData],  //set the currently displayed data as the previous filtered element
+          : [...state.renderedData], //set the currently displayed data as the previous filtered element
         nameSortActive: false,
       };
     case SORT_BY_DATE_BEGIN:
