@@ -32,6 +32,7 @@ const Templates = (props) => {
       <div className="templates py-8 grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-y-8 justify-items-center">
         {currentData.map((temp, idx) => (
           <TemplateCard
+            testId={`template-card${idx}`}
             key={idx}
             name={temp.name}
             description={temp.description}
